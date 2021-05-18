@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_16_065437) do
+ActiveRecord::Schema.define(version: 2021_05_18_135124) do
+
+  create_table "enrollments", force: :cascade do |t|
+    t.integer "study_id", null: false
+    t.integer "subject_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["study_id"], name: "index_enrollments_on_study_id"
+    t.index ["subject_id"], name: "index_enrollments_on_subject_id"
+  end
 
   create_table "studies", force: :cascade do |t|
     t.string "name"
@@ -20,6 +29,7 @@ ActiveRecord::Schema.define(version: 2021_05_16_065437) do
     t.string "symptoms"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "study_group_id"
   end
 
   create_table "study_groups", force: :cascade do |t|
@@ -28,4 +38,13 @@ ActiveRecord::Schema.define(version: 2021_05_16_065437) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "subjects", force: :cascade do |t|
+    t.string "name"
+    t.integer "age"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "enrollments", "studies"
+  add_foreign_key "enrollments", "subjects"
 end

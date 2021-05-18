@@ -1,3 +1,3 @@
 class StudyGroup < ApplicationRecord
-    has_one :study
+    has_many :study
 end

@@ -3,5 +3,9 @@ class Study < ApplicationRecord
     validates :age, numericality: {greater_than: 7}
     validates :phase, numericality: {less_than_or_equal_to: 5}
 
-    has_many :study_group
+    belongs_to :study_group
+
+    has_many :enrollments
+    has_many :subjects, through: :enrollments
+
 end
